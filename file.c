@@ -1,10 +1,11 @@
-//fisher-yates shuffling algorithms
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <time.h>
 
-int print_array(int a[]);
+void print_array(int a[]);
 void swap(int*, int*);
-void rotateArray(int, int, int);
+void rotateArray(int*, int, int);
 
 int main(void)
 {
@@ -18,14 +19,11 @@ int main(void)
         a[i] = i;
     }
 
-    for (int i = n - 1; i > 0; i--)
-    {
-        j = rand() % i;
-        swap(i, j);
-    }
+    rotateArray(a, n, 4);
+    print_array(a);
 }
 
-int print_array(int a[])
+void print_array(int a[])
 {
     int n = 25;
 
@@ -42,12 +40,13 @@ void swap(int *a, int *b)
     *b = temp;
 }
 
+//Fisher Yates algorithm for shuffling an array
 void rotateArray(int *a, int n, int rot)
 {
-    (int *) buf = (int *) malloc(rot * sizeof(int));
+    int* buf = (int *) malloc(rot * sizeof(int));
     //for (int i = 0; i < rot; i++){buf[i] = a[i];}
 
-    memcpy(buf, a, rot(sizeof(int)));
+    memcpy(buf, a, rot * (sizeof(int)));
 
     for (int i = rot; i < n; i++)
     {
@@ -56,8 +55,8 @@ void rotateArray(int *a, int n, int rot)
 
     for (int i = 0; i < rot; i ++)
     {
-        a[n - rot + 1] = buf[i];
+        a[n - rot + i] = buf[i];
     }
-    memcpy(&a[n - rot], buf, rot*(sizeof(int)))
+    memcpy(&a[n - rot], buf, rot*(sizeof(int)));
 }
 // ((rot % n) + n) % n
