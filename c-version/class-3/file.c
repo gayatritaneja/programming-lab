@@ -40,7 +40,7 @@ void swap(int *a, int *b)
     *b = temp;
 }
 
-//Fisher Yates algorithm for shuffling an array
+//Rotating an array
 void rotateArray(int *a, int n, int rot)
 {
     int* buf = (int *) malloc(rot * sizeof(int));
