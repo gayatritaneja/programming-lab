@@ -48,7 +48,11 @@ void rotateArray(int* arr, int n, int rot)
         arr[i - rot] = arr[i];
     }
 
+<<<<<<< HEAD
     for (int i = 0; i < n; i++)
+=======
+    for (int i = 0; i < rot; i++)
+>>>>>>> 4410b70f6ff1d518988469d352eb268dc00f7238
     {
         printf("%d ", arr[i]);
     }
