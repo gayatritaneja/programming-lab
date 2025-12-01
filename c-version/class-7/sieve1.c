@@ -1,6 +1,7 @@
+//finding nth prime number using sieve of erastonsthenes
+
 #include <stdio.h>
 #include <stdlib.h>
-
 
 int main(void)
 {
@@ -11,12 +12,11 @@ int main(void)
 
     arr[0] = 0;
     arr[1] = 0;
-    //setting all elements of the sieve to true
+
     for (int i = 2; i < n; i++)
     {
         arr[i] = 1;
     }
-
 
     for (int i = 2; i < n; i++)
     {
