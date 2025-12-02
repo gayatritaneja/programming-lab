@@ -1,6 +1,7 @@
 use rand::Rng;
 
-fn main() {
+fn main() 
+{
     let mut rng = rand::thread_rng();
 
     let trials = 10_000;
