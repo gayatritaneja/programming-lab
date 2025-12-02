@@ -6,7 +6,7 @@ fn main() {
 
     arr[0] = 0;
     arr[1] = 0;
-    // setting all elements of the sieve to true
+
     for i in 2..n {
         arr[i] = 1;
     }
@@ -14,7 +14,8 @@ fn main() {
     for i in 2..n {
         let mut j = 0;
         while j < n {
-            if j != i {
+            if j != i 
+            {
                 arr[j] = 0;
             }
             j += i;

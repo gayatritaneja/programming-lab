@@ -1,71 +1,71 @@
-//generate all possible subsets
-    //binary numbers till n-1 give all possible subarrays, 0 means not included and 1 means included
-//check if subset is coprime, if it is not, remove
-    //every number should be a coprime with every other number
-    //run two nested loops -> i and j and check every i's coprimality with every j except when i = j
-//add a max variable, if it is a coprime subset and the sum is greater that max, replace the value of max
-    //if the subset is coprime, find the sum of the subset
-    //if sum is greater than max, rewrite max
-
-//functions we will need
-    //isCoprime(a, b)
-    //isCoPrimeArray
-    //sumArray
-    //main: generates all subarrays and performs the main logic
-
-use std::io::{self, Read};
-fn main()
+fn gcd(mut a:i32, mut b:i32) -> i32
 {
-
-}
-
-fn gcd(mut a: i64, mut b: i64) -> i64
-{
-    a = a.abs();
-    b = b.abs();
-    while b!= 0
+    while b != 0
     {
-        let t = a % b;
-        a = b;
-        b = t;
+        let temp = b;
+        b = a % b;
+        a = temp;
     }
-    a
+    a.abs()
 }
 
-fn is_coprime(a: i64, b:i64) -> bool
+fn is_comprime_subset(subset: &Vec<i32>) -> bool
 {
-    gcd(a, b) == 1
-}
-
-fn is_coprime_array(arr: &[i64]) -> bool
-{
-    let n = arr.len;
+    let n = subset.len();
     for i in 0..n
     {
         for j in i+1..n
         {
-            if !is_coprime(arr[i], arr[j])
+            if gcd(subset[i], subset[j]) != 1
             {
                 return false;
             }
         }
     }
-    true
+    return true;
 }
 
-fn sum_array(arr: &[i64]) -> i64
+fn sum(subset: &Vec<i32>) -> i32
 {
-    let n = arr.len();
-    let mut sum = 0;
-    for i in 0..n
+    let mut total = 0;
+
+    for num in subset.iter()
     {
-        sum = sum + arr[i];
+        total += num;
     }
-    sum
+    total
 }
 
-fn main_impl(nums: &[i64]) -> (i64, Vec<i64>)
+fn main()
 {
-    let n = nums.len();
-    
+    let arr = vec![2, 3, 4, 5, 7, 9];
+    let n = arr.len();
+
+    let mut max_sum = 0;
+    let mut best_subset = Vec::new();
+
+    for mask in 0..(1 << n)
+    {
+        let mut subset = Vec::new();
+
+        for i in 0..n
+        {
+            if (mask & (1 << i)) != 0
+            {
+                subset.push(arr[i]);
+            }
+        }
+
+        if is_comprime_subset(&subset)
+        {
+            let s = sum(&subset);
+            if s > max_sum
+            {
+                max_sum = s;
+                best_subset = subset.clone();
+            }
+        }
+    }
+    println!("Max sum: {}", max_sum);
+    println!("Best subset = {:?}", best_subset);
 }
